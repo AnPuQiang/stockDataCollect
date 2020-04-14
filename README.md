@@ -1,2 +1,3 @@
 # stockDataCollect
-Hello world
+- add get data interface
+- add config

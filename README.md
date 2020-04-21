@@ -6,3 +6,4 @@ todo
 - fix Config bug
 - test on ali Cloud
 - learn how to push message in wechat
+- go modules

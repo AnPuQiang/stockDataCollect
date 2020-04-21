@@ -2,9 +2,10 @@ package service
 
 import (
 	"fmt"
-	"github.com/labstack/gommon/log"
 	"io/ioutil"
 	"net/http"
+
+	log "github.com/Sirupsen/logrus"
 )
 
 //begin=2015-09-01&code=600004&end=2015-09-02

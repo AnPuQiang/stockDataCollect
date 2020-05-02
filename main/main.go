@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/http"
 	"stockDataCollect/config"
+	"stockDataCollect/handler"
 	"stockDataCollect/service"
 	"time"
 
@@ -25,7 +26,11 @@ func main() {
 
 	go service.RoutineQuery()
 
+	serviceHandler := handler.NewServiceHandler()
 	mux := bone.New()
+
+	mux.Get("/wechat", serviceHandler.GetWXConnect())
+
 	address := fmt.Sprintf(":%d", config.Configuration.Port)
 	s := &http.Server{
 		Addr:         address,

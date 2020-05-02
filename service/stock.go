@@ -4,9 +4,44 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"stockDataCollect/config"
+	"time"
 
 	log "github.com/Sirupsen/logrus"
 )
+
+func RoutineQuery() {
+
+	for {
+		now := time.Now()
+
+		format := time.Now().Format("2006-01-01")
+		fmt.Println("format:", format)
+		fmt.Println("today is ", now.Weekday())
+		//filter time
+		if now.Weekday() == time.Sunday || now.Weekday() == time.Saturday {
+			time.Sleep(time.Hour)
+			continue
+		}
+		//9:30-10:00 10:00-11:00 11:00-11:30 && 13:00-15:00
+		if (now.Hour() == 9 && now.Minute() >= 30) || (now.Hour() == 10) || (now.Hour() == 11 && now.Minute() <= 30) ||
+			(now.Hour() == 13) || (now.Hour() == 14) {
+
+			for i := 0; i < len(config.Configuration.StockCode); i++ {
+				GetStockData(format, format, config.Configuration.StockCode[i])
+			}
+
+		} else {
+			time.Sleep(time.Minute)
+
+			continue
+		}
+
+		time.Sleep(time.Minute)
+
+	}
+
+}
 
 //begin=2015-09-01&code=600004&end=2015-09-02
 /** response format
@@ -76,5 +111,7 @@ func GetStockData(begin string, end string, code string) {
 		log.Errorf("[GetStockData] ioutil.ReadAll(resp.Body) err is", err.Error())
 	}
 
+	//Decode json and save in ES, ES in localhost
+	//if the stock is volatile, send it through wechat
 	fmt.Println(string(body))
 }

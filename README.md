@@ -3,7 +3,10 @@
 - add config
 
 todo
-- fix Config bug
-- test on ali Cloud
 - learn how to push message in wechat
 - go modules
+- deploy es in localhost
+
+finished
+- fix Config bug =avoid it first
+- test on ali Cloud =worked

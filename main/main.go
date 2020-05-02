@@ -36,7 +36,7 @@ func main() {
 		Addr:         address,
 		Handler:      mux,
 		IdleTimeout:  100 * time.Second,
-		ReadTimeout:  2 * time.Second,
+		ReadTimeout:  20 * time.Second,
 		WriteTimeout: 10 * time.Second,
 	}
 	log.Println("Server start serving on", config.Configuration.Port)
